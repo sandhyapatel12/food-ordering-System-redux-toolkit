@@ -4,4 +4,9 @@ Foodie's Haven is a modern and user-friendly food ordering platform designed to 
 
 ## Functionality
 
-- [Login with social Functionality]
+- User Registration and Login
+- Login with socials(like google, faceBook, instagram)
+- Filter menus categories wise
+- Search specific food
+- cart Management
+- display logged in user profile
