@@ -3,6 +3,7 @@ import auth0 from 'auth0-js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getUserApi, saveUserData, loginUser } from '../slices/clientSlice/authSlice';
+import LoginModal from './LoginModel';
 
 const webAuth = new auth0.WebAuth({
     domain: 'dev-r8pctvhfuf7h3kaa.us.auth0.com',  // Replace with your Auth0 domain
@@ -25,11 +26,11 @@ const GoogleLogin = () => {
     const navigate = useNavigate();
 
     const handleGoogleLogin = () => {
-        if (isAuthenticated) {
-            alert('You are already logged in.');
-            navigate('/home');
-            return;
-        }
+        // if (isAuthenticated) {
+        //     alert('You are already logged in.');
+        //     navigate('/home');
+        //     return;
+        // }
 
         webAuth.authorize({
             connection: 'google-oauth2',
@@ -43,7 +44,7 @@ const GoogleLogin = () => {
                 const { email, name, picture } = profile;
                 const password = 'defaultPassword'; // You can add logic to generate or request password.
 
-                // Check if the user already exists
+                // Check  the user already exists
                 const existingUser = await getUserApi(email);
                 if (existingUser?.length > 0) {
                     alert('You are already logged in.');
@@ -77,6 +78,21 @@ const GoogleLogin = () => {
                 <h1>Continue with Google</h1>
 
             </button>}
+
+            {/* {   <button
+                type='submit'
+                className='flex w-full items-center justify-center bg-gray-300 mt-3 rounded-full text-black font-bold py-2 hover:bg-gray-400'
+                onClick={handleGoogleLogin}
+            >
+
+                <img
+                    className='h-10 w-16'
+                    src='github-icon.png' />
+
+                <h1>Continue with GitHub</h1>
+
+            </button>} */}
+
         </>
     );
 };

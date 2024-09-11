@@ -121,6 +121,7 @@ const authSlice = createSlice({
       state.alreadyLoggedIn = true;
     }
   },
+ 
   //when we want to perform any Asynchronous work or cross-slice commnucation like (work with api) then use extraReducers
   extraReducers: (builder) => {     //builder handle api all states using builder (here builder pass as an argument)
 

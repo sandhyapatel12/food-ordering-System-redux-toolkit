@@ -1,7 +1,7 @@
 // Login.js
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../slices/clientSlice/authSlice';
 import GoogleLogin from '../components/GoogleLogin';
 
@@ -15,8 +15,10 @@ const Login = () => {
   //dispatch trigger the action
   const dispatch = useDispatch()
 
+  const navigate = useNavigate()
+
   //destructure from authSlices using useselector
-  const { loading, error, user } = useSelector((state) => state.auth);  //state is a parameter and auth come from store where define in root reducers
+  const { loading, error, user, isAuthenticated } = useSelector((state) => state.auth);  //state is a parameter and auth come from store where define in root reducers
   // console.log("current user is......", user);
   // console.log(user.name);
 
@@ -31,7 +33,10 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();   //page can't reload
     dispatch(loginUser(formData));  //loginUser  come from authSlice where we can create thunk and formData come from above where define as a usestate
+    { isAuthenticated && navigate('/home') }
   };
+
+  
 
 
   return (
@@ -70,7 +75,7 @@ const Login = () => {
                   name="email"
                   type="email"
                   placeholder="Enter your email"
-                  
+
                 />
               </div>
 
@@ -112,8 +117,8 @@ const Login = () => {
             </form>
             {/* //--------login with google button-------------------------- */}
 
-             {/*  here login with google button also define out of form other wise simple login credentials do matters */}
-             <GoogleLogin />
+            {/*  here login with google button also define out of form other wise simple login credentials do matters */}
+            <GoogleLogin />
 
           </div>
         </div>

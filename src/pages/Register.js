@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../slices/clientSlice/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
 
@@ -10,14 +11,18 @@ const Register = () => {
   //destructure from formData
   const { name, email, password } = formData;
 
+  const [emailError, setemailError] = useState('')
+
   //dispatch give order to action for do work as per instuctions 
   //dispatch trigger the action
   const dispatch = useDispatch();
 
+  const navigate = useNavigate()
+
   //destructure from authSlices using useselector
-  const { loading, error, user } = useSelector((state) => state.auth);    //state is a parameter and auth come from store where define in root reducers
+  const { loading, error, isAuthenticated } = useSelector((state) => state.auth);    //state is a parameter and auth come from store where define in root reducers
   // console.log('register user...', user);
-  
+
 
   //onchange for set new user data
   const onChange = (e) => {
@@ -31,7 +36,12 @@ const Register = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(registerUser(formData)); //registerUser  come from authSlice where we can create thunk and formData come from above where define as a usestate
+    // { isAuthenticated && navigate('/login') }
+    navigate('/login')
   };
+
+
+
 
 
   return (
@@ -92,6 +102,7 @@ const Register = () => {
                   required
                   maxLength={25}
                 />
+
               </div>
 
               <div className="mb-6">
@@ -108,13 +119,13 @@ const Register = () => {
                   placeholder="Enter your password"
                   required
                   minLength={2}
-                  // maxLength={6}
+                // maxLength={6}
                 />
 
               </div>
 
 
-              <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded">
+              <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
                 {loading ? 'Registring......' : 'Register'}
               </button>
 
