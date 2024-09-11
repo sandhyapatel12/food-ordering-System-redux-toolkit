@@ -17,7 +17,7 @@ const Login = () => {
 
   //destructure from authSlices using useselector
   const { loading, error, user } = useSelector((state) => state.auth);  //state is a parameter and auth come from store where define in root reducers
-  console.log("current user is......", user);
+  // console.log("current user is......", user);
   // console.log(user.name);
 
 
@@ -70,6 +70,7 @@ const Login = () => {
                   name="email"
                   type="email"
                   placeholder="Enter your email"
+                  
                 />
               </div>
 
@@ -108,11 +109,11 @@ const Login = () => {
                 <div className='text-xs'>OR</div>
                 <div>---------------------</div>
               </div>
-              <GoogleLogin />
             </form>
             {/* //--------login with google button-------------------------- */}
 
              {/*  here login with google button also define out of form other wise simple login credentials do matters */}
+             <GoogleLogin />
 
           </div>
         </div>

@@ -15,7 +15,9 @@ const Register = () => {
   const dispatch = useDispatch();
 
   //destructure from authSlices using useselector
-  const { loading, error } = useSelector((state) => state.auth);    //state is a parameter and auth come from store where define in root reducers
+  const { loading, error, user } = useSelector((state) => state.auth);    //state is a parameter and auth come from store where define in root reducers
+  // console.log('register user...', user);
+  
 
   //onchange for set new user data
   const onChange = (e) => {
@@ -69,9 +71,9 @@ const Register = () => {
                   name="name"
                   type="text"
                   placeholder="Enter your name"
-                  // required
-                  // maxLength={25}
-                  // minLength={3}
+                  required
+                  maxLength={25}
+                  minLength={3}
                 />
               </div>
 
@@ -87,8 +89,8 @@ const Register = () => {
                   name="email"
                   type="email"
                   placeholder="Enter your email"
-                  // required
-                  // maxLength={25}
+                  required
+                  maxLength={25}
                 />
               </div>
 
@@ -105,8 +107,8 @@ const Register = () => {
                   type="password"
                   placeholder="Enter your password"
                   required
-                  // minLength={2}
-                  // // maxLength={6}
+                  minLength={2}
+                  // maxLength={6}
                 />
 
               </div>

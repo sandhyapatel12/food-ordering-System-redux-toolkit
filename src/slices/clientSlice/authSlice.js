@@ -9,38 +9,55 @@ const API_URL = 'https://66b361f97fba54a5b7ecba9e.mockapi.io/login';
 
 //save google user data in moke api
 export const saveUserData = async (data) => {
-  const response = await axios.post(API_URL, data);
-  console.log("save user...", response.data);
-  return response.data;
+  try {
+    const response = await axios.post(API_URL, data);
+    // console.log("save user...", response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //for logout user
 export const deleteUserApi = async (id) => {
-  const response = await axios.delete(`${API_URL}/${id}`);  //id define current user id which user want to delete
-  console.log("delete user...", response.data);
-  return response.data;
+  try {
+    const response = await axios.delete(`${API_URL}/${id}`);  //id define current user id which user want to delete
+    console.log("delete user...", response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //get user data using email
 export const getUserApi = async (email) => {
-  const response = await axios.get(`${API_URL}?email=${email}`);  //here match the email if match then return user data
-  console.log("get user...", response.data);
-  return response.data;
+  try {
+    const response = await axios.get(`${API_URL}?email=${email}`);  //here match the email if match then return user data
+    // console.log("get user...", response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //---------------------------------------create and login user using thunk--------------------------------------------
 
+
 //add new user into database -- registration
-//create thunk -- createAsyncThunk takes 2 arguments first "name" and second callback function
 export const registerUser = createAsyncThunk('auth/register', async (registerUserData, { rejectWithValue }) => {
   try {
     const { data } = await axios.get(API_URL);
+
+    //check user already axits
     const userExists = data.some(user => user.email === registerUserData.email);
 
     if (userExists) {
       return rejectWithValue('User already exists');
-    } else {
+    }
+    else {
       await axios.post(API_URL, registerUserData);
+      console.log("register user data.....", registerUserData);
+
       return registerUserData;
     }
   } catch (error) {
@@ -57,7 +74,7 @@ export const loginUser = createAsyncThunk('auth/login', async (credentials, { re
 
     //get data from api
     const response = await axios.get(`${API_URL}?email=${email}`);
-    console.log(response);
+    console.log("login user Data....", response);
     // return response.data;
 
     if (response.data.length === 0) {

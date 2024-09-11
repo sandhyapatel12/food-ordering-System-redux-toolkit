@@ -14,6 +14,8 @@ const LogoutModal = ({ closeModal }) => {
 
   //for user logout
   const userData = useSelector((state) => state.auth.user)
+  console.log("logout user data is.......", userData);
+  
 
   //for logout user
   const handleLogout = async () => {
@@ -23,6 +25,8 @@ const LogoutModal = ({ closeModal }) => {
     //userData includes user all data
     if (userData) {
       await deleteUserApi(userData.id);   //id define current user id which user want to logout(id come from authSlice where define in deleteUserApi function)
+      console.log("user data id...", userData.id);
+      
     }
     dispatch(logoutUser());  //logoutUser come from authSlice where define in logoutUser reducers
     navigate('/login');

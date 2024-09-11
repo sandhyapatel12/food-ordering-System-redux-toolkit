@@ -19,17 +19,17 @@ const GoogleLogin = () => {
     const { isAuthenticated, alreadyLoggedIn } = useSelector((state) => state.auth);
 
     const userInfo = useSelector((state) => state.auth.user);
-    console.log("google userInfo......", userInfo);
+    // console.log("google userInfo......", userInfo);
     
 
     const navigate = useNavigate();
 
     const handleGoogleLogin = () => {
-        // if (isAuthenticated) {
-        //     alert('You are already logged in.');
-        //     navigate('/home');
-        //     return;
-        // }
+        if (isAuthenticated) {
+            alert('You are already logged in.');
+            navigate('/home');
+            return;
+        }
 
         webAuth.authorize({
             connection: 'google-oauth2',
@@ -45,7 +45,7 @@ const GoogleLogin = () => {
 
                 // Check if the user already exists
                 const existingUser = await getUserApi(email);
-                if (existingUser.length > 0) {
+                if (existingUser?.length > 0) {
                     alert('You are already logged in.');
                     dispatch(loginUser(existingUser[0]));
                     navigate('/home');
