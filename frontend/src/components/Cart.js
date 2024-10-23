@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import CartItem from './CartItem';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 
 const stripePromise = loadStripe('pk_test_51PxqP9P5gS7us9VDtYiPc9a7p0rLcXPaJtafBCcd8SyIj0LzTmrb5DTBDmrOtaM3IlZ9Gu3MjiDFoQLm4HzCUzD300Kpnpp38T');  //stripe publishable key

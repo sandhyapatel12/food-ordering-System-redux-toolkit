@@ -25,6 +25,11 @@ then add following scripts into package.json file at root
     "client": "cd frontend && npm start"
 
   }
+## for installing node_modules fronted side come in fronted using(cd ..)
+
+PS C:\Users\hp\Downloads\food-ordering-System-redux-toolkit-main\food-ordering-System-redux-toolkit-main\frontend> 
+
+at above path install node module  ==> `npm install`
 
 ## start app
 
